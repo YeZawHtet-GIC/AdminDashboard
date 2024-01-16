@@ -125,7 +125,7 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-
+                    @yield('create-category')
                 </div><!-- /.container-fluid -->
             </section>
             <!-- /.content -->
