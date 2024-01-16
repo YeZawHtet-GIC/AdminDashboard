@@ -13,9 +13,14 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware("auth");
+    }
     public function index()
     {
-        return view("dashboard.category.create");
+        $categories = Category::all();
+        return view("dashboard.category.index", compact("categories"));
     }
 
     /**
@@ -36,10 +41,10 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $category=new Category;
-        $category->name=$request->name;
+        $category = new Category;
+        $category->name = $request->name;
         $category->save();
-        return redirect()->route("category.index")->with("success","Successfully Inserted");
+        return redirect()->route("category.create")->with("success", "New Category Added Successfully!");
     }
 
     /**
@@ -50,7 +55,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view("dashboard.category.detail", compact("category"));
     }
 
     /**
@@ -61,7 +66,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view("dashboard.category.edit", compact("category"));
     }
 
     /**
@@ -73,7 +78,9 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $category->name = $request->name;
+        $category->update();
+        return redirect()->route("category.index");
     }
 
     /**
@@ -84,6 +91,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        if ($category) {
+            $category->delete();
+        }
+        return redirect()->route("category.index")->with('delete', 'Category Deleted!');
     }
 }

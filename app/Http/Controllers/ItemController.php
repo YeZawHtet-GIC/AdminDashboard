@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Category;
 use App\Http\Requests\StoreItemRequest;
 use App\Http\Requests\UpdateItemRequest;
 
@@ -15,7 +16,8 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        $items = Item::all();
+        return view("dashboard.item.index", compact("items"));
     }
 
     /**
@@ -25,7 +27,8 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        $categories=Category::all();
+        return view("dashboard.item.create", compact("categories"));
     }
 
     /**
@@ -36,7 +39,13 @@ class ItemController extends Controller
      */
     public function store(StoreItemRequest $request)
     {
-        //
+        $item=new Item;
+        $item->name=$request->name;
+        $item->price=$request->price;
+        $item->category_id=$request->category;
+        $item->expire_date=$request->epdate;
+        $item->save();
+         return redirect()->route("item.create");
     }
 
     /**
