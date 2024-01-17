@@ -11981,17 +11981,26 @@ textarea.form-control-lg {
 
 /* ==============================Modified CSS========================== */
 .neumorphic-form {
-  background-color: #f0f0f0;
+  background-color: #ffffff;
   padding: 30px;
   border-radius: 15px;
   box-shadow: 10px 10px 20px #c8c8c8, -10px -10px 20px #ffffff;
 }
 
 .neumorphic-btn {
-  background-color: #084298;
+  background-color: #220898;
   padding: 10px 20px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 5px 5px 10px #c8c8c8, -5px -5px 10px #ffffff;
+}
+
+.neumorphic-input {
+  background-color: #f0f0f0;
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: inset 5px 5px 10px #c8c8c8, inset -5px -5px 10px #ffffff;
+  transition: box-shadow 0.3s ease-in-out;
 }
