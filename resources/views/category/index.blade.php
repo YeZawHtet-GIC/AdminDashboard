@@ -2,8 +2,7 @@
 @section('category')
     <div class="container">
         <div class="row">
-            
-            <div class="col-md-8 offset-1">
+            <div class="col-md-12 p-5 bg-dark rounded">
                 <div class="h3 text-center">Category List</div>
                 @if (session('update'))
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -21,8 +20,9 @@
                     </button>
                 </div>
                 @endif
-                <table class="table table-borderd table-striped text-center rounded p-3">
-                    <thead class="thead-dark">
+                <div class="d-flex justify-content-end">{{ $categories->links() }}</div>
+                <table class="table table-dark table-borderd table-striped rounded p-3">
+                    <thead class="h5">
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col" colspan="2">Name</th>

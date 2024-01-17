@@ -2,18 +2,18 @@
 @section('category')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 offset-1">
+            <div class="col-md-9 offset-1 bg-dark px-3 pt-5 rounded">
                 @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>{{ session('success') }}</strong>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>{{ session('success') }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 @endif
-                <div class="card">
-                    <div class="card-header text-center h3">Item Insert Page</div>
-                    <div class="card-body">
+                <div class="card text-warning bg-black">
+                    <div class="card-header text-center h3 text-warning">Item Insert Page</div>
+                    <div class="card-body text-warning">
                         <form action="{{ route('item.store') }}" method="post">
                             @csrf
                             <label for="name" class="form-label">Item Name <small class="text-danger">*</small></label>
@@ -55,13 +55,13 @@
                             <label for="Expire Date" class="form-label">Item Expire Date <small
                                     class="text-danger">*</small></label>
                             <input type="date" name="epdate" value="{{ old('epdate') }}"
-                                placeholder="Choose Expire Date" class="form-control @error('epdate')
+                                placeholder="Choose Expire Date"
+                                class="form-control @error('epdate')
                                     is-invalid
                                 @enderror">
                             @error('epdate')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
-                            <a href="{{ route('item.index') }}" class="btn btn-outline-dark mt-3">Back</a>
                             <button class="btn btn-outline-primary mt-3">Submit</button>
                         </form>
                     </div>
