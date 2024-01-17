@@ -26,8 +26,8 @@ class UpdateItemRequest extends FormRequest
         return [
             'name' => 'required | unique:items,name,' . $this->route('item')->id,
             "price" => "required",
-            "category_id" => "required",
-            "expire_date" => "required",
+            "category" => "required",
+            "epdate" => "required",
         ];
     }
 }

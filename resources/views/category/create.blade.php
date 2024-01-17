@@ -1,15 +1,18 @@
 @extends('dashboard.index')
 @section('category')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-8 offset-1">
                 <div class="card">
                     @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>{{ session('success') }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     @endif
-                    <div class="card-header text-center">Category Insert Page</div>
+                    <div class="card-header text-center h3">Category Insert Page</div>
                     <div class="card-body">
                         <form action="{{ route('category.store') }}" method="post">
                             @csrf

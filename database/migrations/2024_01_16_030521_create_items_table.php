@@ -20,6 +20,7 @@ class CreateItemsTable extends Migration
             $table->integer('category_id');
             $table->date('expire_date');
             $table->timestamps();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

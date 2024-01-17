@@ -20,7 +20,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view("dashboard.category.index", compact("categories"));
+        return view("category.index", compact("categories"));
     }
 
     /**
@@ -30,7 +30,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view("dashboard.category.create");
+        return view("category.create");
     }
 
     /**
@@ -55,7 +55,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view("dashboard.category.detail", compact("category"));
+        return view("category.detail", compact("category"));
     }
 
     /**
@@ -66,7 +66,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view("dashboard.category.edit", compact("category"));
+        return view("category.edit", compact("category"));
     }
 
     /**
@@ -80,7 +80,7 @@ class CategoryController extends Controller
     {
         $category->name = $request->name;
         $category->update();
-        return redirect()->route("category.index");
+        return redirect()->route("category.index")->with('update', 'Updated Successfully');
     }
 
     /**

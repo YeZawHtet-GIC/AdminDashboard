@@ -1,10 +1,10 @@
 @extends('dashboard.index')
 @section('category')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-8 offset-1">
                 <div class="card">
-                    <div class="card-header text-center">Category Update Page</div>
+                    <div class="card-header text-center h3">Category Update Page</div>
                     <div class="card-body">
                         <form action="{{ route('category.update', $category) }}" method="post">
                             @csrf
