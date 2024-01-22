@@ -6,7 +6,7 @@
                 <div class="card">
                     <div class="card-header text-center">Item Update Page</div>
                     <div class="card-body">
-                        <form action="{{ route('item.update', $item) }}" method="post">
+                        <form action="{{ route('item.update', $item) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('patch')
                             <label for="name" class="form-label">Item Name <small class="text-danger">*</small></label>
@@ -57,6 +57,12 @@
                             @error('epdate')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
+                            <label for="Image" class="form-label">Choose Image<small
+                                    class="text-danger">*</small></label><br>
+                                    <img style="width: 6rem; height:6rem; border-radius:5rem;" src="{{ asset("storage/gallery/".$item->image) }}" alt="Item Image">
+                            <input type="file" name="image" accept="image/*" value="{{ old('image', $item->image) }}"
+                                placeholder="Choose Image"
+                                class="form-control">
                             <a href="{{ route('item.index') }}" class="btn btn-outline-dark mt-3">Back</a>
                             <button class="btn btn-outline-primary mt-3">Update</button>
                         </form>

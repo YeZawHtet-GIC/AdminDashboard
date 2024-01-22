@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Item;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
@@ -16,8 +17,13 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
+// Route::get('/', function () {
+//     return view('auth.login');
+// });
+
 Route::get('/', function () {
-    return view('auth.login');
+    $data = Item::all();
+    return view('index', compact('data'));
 });
 
 Auth::routes();

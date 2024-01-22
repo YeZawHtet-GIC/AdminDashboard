@@ -14,7 +14,7 @@
                 <div class="card text-warning bg-black">
                     <div class="card-header text-center h3 text-warning">Item Insert Page</div>
                     <div class="card-body text-warning">
-                        <form action="{{ route('item.store') }}" method="post">
+                        <form action="{{ route('item.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <label for="name" class="form-label">Item Name <small class="text-danger">*</small></label>
                             <input type="text" name="name" value="{{ old('name') }}" placeholder="Enter Item Name"
@@ -60,6 +60,16 @@
                                     is-invalid
                                 @enderror">
                             @error('epdate')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                            <label for="Image" class="form-label">Choose Image<small
+                                    class="text-danger">*</small></label>
+                            <input type="file" name="image" accept="image/*" value="{{ old('image') }}"
+                                placeholder="Choose Image"
+                                class="form-control @error('image')
+                                    is-invalid
+                                @enderror">
+                            @error('image')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                             <button class="btn btn-outline-primary mt-3">Submit</button>

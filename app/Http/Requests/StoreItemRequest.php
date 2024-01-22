@@ -28,6 +28,7 @@ class StoreItemRequest extends FormRequest
             "price"=> "required",
             "category"=> "required",
             "epdate"=> "required",
+            "image"=>"required|image|mimes:jpeg,png,jpg,gif",
         ];
     }
 }

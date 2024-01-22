@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Category;
 use App\Http\Requests\StoreItemRequest;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdateItemRequest;
 
 class ItemController extends Controller
@@ -21,7 +22,7 @@ class ItemController extends Controller
     }
     public function index()
     {
-        $items =Item::paginate(3);
+        $items = Item::paginate(3);
         return view("item.index", compact("items"));
     }
 
@@ -44,7 +45,12 @@ class ItemController extends Controller
      */
     public function store(StoreItemRequest $request)
     {
+
+        $image = $request->image;
+        $newName = "gallery_" . uniqid() . "." . $image->extension();
+        $image->storeAs("public/gallery", $newName);
         $item = new Item;
+        $item->image = $newName;
         $item->name = $request->name;
         $item->price = $request->price;
         $item->category_id = $request->category;
@@ -85,6 +91,20 @@ class ItemController extends Controller
      */
     public function update(UpdateItemRequest $request, Item $item)
     {
+        if ($request->image) {
+            $image = $request->image;
+            $newImage = "gallery_" . uniqid() . "." . $image->extension();
+            $image->storeAs("public/gallery", $newImage);
+            if ($item->image) {
+                Storage::delete("public/gallery/{$item->image}");
+            }
+            $item->image = $newImage;
+            $item->name = $request->name;
+            $item->price = $request->price;
+            $item->category_id = $request->category;
+            $item->expire_date = $request->epdate;
+            $item->update();
+        }
         $item->name = $request->name;
         $item->price = $request->price;
         $item->category_id = $request->category;
