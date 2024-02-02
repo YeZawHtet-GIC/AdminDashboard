@@ -26,7 +26,7 @@ class ApiItemUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required|unique:items|max:255",
+            "name" => "required|unique:items,name,".$this->route('id'),
             "price" => "required",
             'category_id' => 'required|exists:categories,id',
             'expire_date' => 'required|date',
