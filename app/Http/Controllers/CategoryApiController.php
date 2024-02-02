@@ -65,7 +65,11 @@ class CategoryApiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category=Category::find($id);
+        if($category){
+            return response()->json($category);
+        }
+        return response()->json("Item Not Found");
     }
 
     /**
@@ -77,7 +81,13 @@ class CategoryApiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category=Category::find($id);
+        if($category){
+            $category->name=$request->name;
+            $category->update();
+            return response()->json("Category Updated Successfully");
+        }
+        return response()->json("Item Not Found");
     }
 
     /**

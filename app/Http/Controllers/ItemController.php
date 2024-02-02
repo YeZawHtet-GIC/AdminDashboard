@@ -91,26 +91,27 @@ class ItemController extends Controller
      */
     public function update(UpdateItemRequest $request, Item $item)
     {
-        if ($request->image) {
-            $image = $request->image;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
             $newImage = "gallery_" . uniqid() . "." . $image->extension();
             $image->storeAs("public/gallery", $newImage);
+        
+            // Delete the old image if it exists
             if ($item->image) {
                 Storage::delete("public/gallery/{$item->image}");
             }
+        
             $item->image = $newImage;
-            $item->name = $request->name;
-            $item->price = $request->price;
-            $item->category_id = $request->category;
-            $item->expire_date = $request->epdate;
-            $item->update();
         }
+        
         $item->name = $request->name;
         $item->price = $request->price;
         $item->category_id = $request->category;
         $item->expire_date = $request->epdate;
         $item->update();
+        
         return redirect()->route('item.index')->with('update', 'Updated Successfully');
+        
     }
 
     /**
