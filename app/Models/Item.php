@@ -13,4 +13,8 @@ class Item extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function getImageAttribute($value)
+    {
+        return asset('storage/gallery/' . $value);
+    }
 }

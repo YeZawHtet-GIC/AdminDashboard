@@ -17,18 +17,7 @@ class ItemApiController extends Controller
     public function index()
     {
         $data = Item::all();
-        // Transform each item to include the image URL
-        $transformedData = $data->map(function ($item) {
-            return [
-                'name' => $item->name,
-                'price' => $item->price,
-                'category_id' => $item->category_id,
-                'expire_date' => $item->expire_date,
-                'image_url' => asset("storage/gallery/{$item->image}"), // Adjust the path as needed
-            ];
-        });
-
-        return response()->json($transformedData);
+        return response()->json($data);
     }
 
     /**
@@ -38,7 +27,7 @@ class ItemApiController extends Controller
      */
     public function create()
     {
-        //
+        return redirect()->route('item.create');
     }
 
     /**
@@ -77,16 +66,7 @@ class ItemApiController extends Controller
     {
         $data = Item::find($id);
         if ($data) {
-            // Transform each item to include the image URL
-            $transformedData =
-                [
-                    'name' => $data->name,
-                    'price' => $data->price,
-                    'category_id' => $data->category_id,
-                    'expire_date' => $data->expire_date,
-                    'image_url' => asset("storage/gallery/{$data->image}"), // Adjust the path as needed
-                ];
-            return response()->json($transformedData);
+            return response()->json($data);
         }
         return response()->json("Item Not Found!");
     }
@@ -101,17 +81,7 @@ class ItemApiController extends Controller
     {
         $item = Item::find($id);
         if ($item) {
-            // Transform each item to include the image URL
-            $transformedData =
-                [
-                    'name' => $item->name,
-                    'price' => $item->price,
-                    'category_id' => $item->category_id,
-                    'expire_date' => $item->expire_date,
-                    'image_url' => asset("storage/gallery/{$item->image}"), // Adjust the path as needed
-                ];
-
-            return response()->json($transformedData);
+            return response()->json($item);
         }
         return response()->json("Item Not Found!");
     }
@@ -152,7 +122,6 @@ class ItemApiController extends Controller
         $item->update();
         return response()->json(["message" => "Item Updated Successfully!"]);
     }
-
 
     /**
      * Remove the specified resource from storage.
